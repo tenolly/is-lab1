@@ -42,6 +42,34 @@
 
 ## Отчет SAST (Bandit)
 
+https://github.com/tenolly/is-lab1/actions/runs/35541208499/job/106159097224
+
+![Отчет SAST](./report/sast.png)
+
 ## Отчет SCA (Synk)
 
+https://github.com/tenolly/is-lab1/actions/runs/35541208499/job/106159097130
+
+![Отчет SCA](./report/sca.png)
+
 # Ссылка на последний успешный запуск pipeline
+
+https://github.com/tenolly/is-lab1/actions/runs/35541208499
+
+Помимо sast/sca, также проходят и тесты приложения:
+
+![Отчет SCA](./report/pytest.png)
+
+Локально можно подергать приложение через curl:
+
+```bash
+docker compose up
+docker compose exec -it web apk add curl
+docker compose exec -it web sh
+```
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{"login":"nikita","password":"Password_1"}' http://localhost:5000/auth/register
+curl -X POST -H "Content-Type: application/json" -d '{"login":"nikita","password":"Password_1"}' http://localhost:5000/auth/login
+curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer <acces_token>" -d '{"title": "Cool Story", "description": "<script>Steal data<script>"}' http://localhost:5000/api/data
+curl -X GET http://localhost:5000/api/data -H "Authorization: Bearer <access_token>"
+```
